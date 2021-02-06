@@ -1,6 +1,6 @@
 {
-    "name": "vuetify-pwa",
-    "short_name": "vuetify-pwa",
+    "name": "WebDev PWA",
+    "short_name": "WebDev PWA",
     "icons": [],
     "start_url": "./index.html",
     "display": "standalone",
