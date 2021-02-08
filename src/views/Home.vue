@@ -6,10 +6,10 @@
 
 <script>
 // @ is an alias to /src
-import MainView from "@/components/MainView.vue";
+import MainView from '@/components/MainView.vue';
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     MainView
   }

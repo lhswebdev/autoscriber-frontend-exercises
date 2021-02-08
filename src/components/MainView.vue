@@ -42,7 +42,7 @@
 <script>
 export default {
   data: () => ({
-    APPNAME: "WebDev PWA"
+    APPNAME: 'WebDev PWA'
   }),
   created() {
     document.title = this.APPNAME;

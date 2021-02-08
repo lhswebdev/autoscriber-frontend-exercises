@@ -3,10 +3,10 @@
 </template>
 
 <script>
-import MainView from "./components/MainView";
+import MainView from './components/MainView';
 
 export default {
-  name: "App",
+  name: 'App',
 
   components: {
     MainView
