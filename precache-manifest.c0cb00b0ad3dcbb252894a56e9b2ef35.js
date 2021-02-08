@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "57bc2dc2e278a2b890ab",
+    "revision": "c32a24076dcad057e10f",
     "url": "/vuetify-pwa/css/app.cb050b55.css"
   },
   {
@@ -8,12 +8,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/vuetify-pwa/css/chunk-vendors.3478fc23.css"
   },
   {
-    "revision": "182642b62565f18bddac9bd3d9b62eb8",
+    "revision": "b381219bfa3415ac0f942fcaea51e5fe",
     "url": "/vuetify-pwa/index.html"
   },
   {
-    "revision": "57bc2dc2e278a2b890ab",
-    "url": "/vuetify-pwa/js/app.49e197cc.js"
+    "revision": "c32a24076dcad057e10f",
+    "url": "/vuetify-pwa/js/app.7c6cd238.js"
   },
   {
     "revision": "ae9b8228de81ad2e22f8",
