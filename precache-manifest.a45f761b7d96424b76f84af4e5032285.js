@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c32a24076dcad057e10f",
+    "revision": "6d1c07a4cafaac576303",
     "url": "/vuetify-pwa/css/app.cb050b55.css"
   },
   {
@@ -8,12 +8,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/vuetify-pwa/css/chunk-vendors.3478fc23.css"
   },
   {
-    "revision": "b381219bfa3415ac0f942fcaea51e5fe",
+    "revision": "f988b2e0507492c3ed4bc63037993fed",
     "url": "/vuetify-pwa/index.html"
   },
   {
-    "revision": "c32a24076dcad057e10f",
-    "url": "/vuetify-pwa/js/app.7c6cd238.js"
+    "revision": "6d1c07a4cafaac576303",
+    "url": "/vuetify-pwa/js/app.db0f7011.js"
   },
   {
     "revision": "ae9b8228de81ad2e22f8",
@@ -26,5 +26,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
     "url": "/vuetify-pwa/robots.txt"
+  },
+  {
+    "revision": "6a547e010d3c6759b21b871a16424f4d",
+    "url": "/vuetify-pwa/service-worker.js"
   }
 ]);
