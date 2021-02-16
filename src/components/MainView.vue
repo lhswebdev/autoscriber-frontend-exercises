@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar dark color="blue" app>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>{{ APPNAME }}</v-toolbar-title>
 
@@ -16,6 +16,24 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
     </v-app-bar>
+
+    <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      bottom
+      temporary
+    >
+      <v-list
+        nav
+        dense
+      >
+        <v-list-item-group>
+          <v-list-item v-for="(item, index) in navbarItems" :key="index">
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
 
     <v-content>
       <v-row dense>
@@ -42,7 +60,13 @@
 <script>
 export default {
   data: () => ({
-    APPNAME: 'WebDev PWA'
+    APPNAME: 'WebDev PWA',
+    drawer: false,
+    navbarItems: [
+      {
+        title: 'Menu Item'
+      }
+    ]
   }),
   created() {
     document.title = this.APPNAME;
