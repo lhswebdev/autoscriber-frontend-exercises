@@ -77,6 +77,10 @@ export default {
 }
 
 html {
-  overflow-y: auto !important;
+  overflow-y: hidden !important;
+}
+
+.v-navigation-drawer--bottom {
+  position: fixed !important;
 }
 </style>
