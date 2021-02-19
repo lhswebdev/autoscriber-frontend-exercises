@@ -38,7 +38,22 @@
     </v-navigation-drawer>
 
     <v-content>
-      <router-view/>
+      <v-col cols="12">
+        <v-card color="pink accent-4" dark class="card" v-if="prompt">
+          <v-card-title class="headline"
+            >Install the Autoscribe App</v-card-title
+          >
+
+          <v-card-subtitle>Autoscribe works best when installed on your device.</v-card-subtitle>
+
+          <v-card-actions>
+            <v-btn text @click="install()" target="_blank"
+              >Download App</v-btn
+            >
+          </v-card-actions>
+        </v-card>
+        <router-view/>
+      </v-col>
     </v-content>
   </v-app>
 </template>
@@ -57,10 +72,21 @@ export default {
         title: 'About',
         href: '/about'
       }
-    ]
+    ],
+    prompt: null
   }),
   created() {
     document.title = this.APPNAME;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      this.prompt = e;
+    });
+  },
+  methods:{
+    async install(){
+      this.prompt.prompt();
+    }
   }
 };
 </script>
@@ -77,10 +103,16 @@ export default {
 }
 
 html {
-  overflow-y: hidden !important;
+  overflow-y: auto !important;
 }
 
 .v-navigation-drawer--bottom {
   position: fixed !important;
+}
+
+@media all and (display-mode: standalone) {
+  #install-prompt {
+    display: none;
+  }
 }
 </style>

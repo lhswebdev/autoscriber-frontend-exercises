@@ -1,21 +1,17 @@
 <template>
-  <v-row dense>
-    <v-col cols="12">
-      <v-card color="#385F73" dark class="card">
-        <v-card-title class="headline"
-          >Welcome to LHS WebDev's PWA Demo</v-card-title
-        >
+  <v-card color="#385F73" dark class="card">
+    <v-card-title class="headline"
+      >Welcome to LHS WebDev's PWA Demo</v-card-title
+    >
 
-        <v-card-subtitle>More content will be added soon.</v-card-subtitle>
+    <v-card-subtitle>More content will be added soon.</v-card-subtitle>
 
-        <v-card-actions>
-          <v-btn text href="http://lhswebdev.github.io/" target="_blank"
-            >Visit Website</v-btn
-          >
-        </v-card-actions>
-      </v-card>
-    </v-col>
-  </v-row>
+    <v-card-actions>
+      <v-btn text href="http://lhswebdev.github.io/" target="_blank"
+        >Visit Website</v-btn
+      >
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
@@ -36,17 +32,4 @@ export default {
 </script>
 
 <style>
-.card {
-  --margin: 10px;
-  width: calc(100% - 2 * var(--margin));
-  /* margin: var(--margin) auto var(--margin) auto; */
-}
-
-.navSwitch {
-  transform: translateY(25%);
-}
-
-html {
-  overflow-y: auto !important;
-}
 </style>
