@@ -1,7 +1,7 @@
 
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 
-recognition.continuous = true;
+recognition.continuous = false;
 recognition.interimResults = true;
 recognition.onstart = () => {
   console.debug('Recognition started');
