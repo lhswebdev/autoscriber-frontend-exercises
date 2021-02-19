@@ -41,10 +41,10 @@
       <v-col cols="12">
         <v-card color="pink accent-4" dark class="card" v-if="prompt && !installed">
           <v-card-title class="headline"
-            >Install the Autoscribe App</v-card-title
+            >Install the Autoscriber App</v-card-title
           >
 
-          <v-card-subtitle>Autoscribe works best when installed on your device.</v-card-subtitle>
+          <v-card-subtitle>Autoscriber works best when installed on your device.</v-card-subtitle>
 
           <v-card-actions>
             <v-btn text @click="install()" target="_blank">
@@ -61,7 +61,7 @@
 <script>
 export default {
   data: () => ({
-    APPNAME: 'WebDev PWA',
+    APPNAME: 'Autoscriber App',
     drawer: false,
     navbarItems: [
       {

@@ -1,6 +1,6 @@
 {
-    "name": "WebDev PWA",
-    "short_name": "WebDev PWA",
+    "name": "Autoscriber App",
+    "short_name": "Autoscriber App",
     "icons": [{
         "src": "./logo.png",
         "sizes": "144x144",

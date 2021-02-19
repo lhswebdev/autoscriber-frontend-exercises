@@ -1,4 +1,4 @@
-# vuetify-pwa
+# autoscriber-app
 
 ## Project setup
 ```
