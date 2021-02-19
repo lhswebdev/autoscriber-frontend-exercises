@@ -1,8 +1,12 @@
 {
     "name": "WebDev PWA",
     "short_name": "WebDev PWA",
-    "icons": [],
-    "start_url": "./index.html",
+    "icons": [{
+        "src": "./logo.png",
+        "sizes": "144x144",
+        "type": "image/png"
+    }],
+    "start_url": "/vuetify-pwa",
     "display": "standalone",
     "background_color": "#000000",
     "theme_color": "#000000"
