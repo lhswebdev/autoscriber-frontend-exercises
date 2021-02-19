@@ -36,7 +36,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/vuetify-pwa/robots.txt"
   },
   {
-    "revision": "e5f6dd39884b392dd62ffbad19617df7",
+    "revision": "a9d098f2cece6eb198b38d90ef4c5722",
     "url": "/vuetify-pwa/service-worker.js"
   }
 ]);
