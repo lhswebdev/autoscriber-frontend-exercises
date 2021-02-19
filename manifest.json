@@ -1,1 +1,1 @@
-{"name":"WebDev PWA","short_name":"WebDev PWA","theme_color":"#000000","icons":[{"src":"./logo.png","sizes":"144x144","type":"image/png"}],"start_url":"/","display":"standalone","background_color":"#000000"}
+{"name":"Autoscriber App","short_name":"Autoscriber App","theme_color":"#000000","icons":[{"src":"./logo.png","sizes":"144x144","type":"image/png"}],"start_url":"/","display":"standalone","background_color":"#000000"}

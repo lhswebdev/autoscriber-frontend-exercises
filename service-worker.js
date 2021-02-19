@@ -14,10 +14,10 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.59f450dcfa7db6ba19bf2e7f774eda42.js"
+  "/precache-manifest.38c1492f83e82aeefaf7fb6a7c9ce554.js"
 );
 
-workbox.core.setCacheNameDetails({prefix: "vuetify-pwa"});
+workbox.core.setCacheNameDetails({prefix: "autoscriber-app"});
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
