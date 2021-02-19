@@ -39,7 +39,7 @@
 
     <v-content>
       <v-col cols="12">
-        <v-card color="pink accent-4" dark class="card" v-if="prompt">
+        <v-card color="pink accent-4" dark class="card" v-if="prompt && !installed">
           <v-card-title class="headline"
             >Install the Autoscribe App</v-card-title
           >
@@ -47,9 +47,9 @@
           <v-card-subtitle>Autoscribe works best when installed on your device.</v-card-subtitle>
 
           <v-card-actions>
-            <v-btn text @click="install()" target="_blank"
-              >Download App</v-btn
-            >
+            <v-btn text @click="install()" target="_blank">
+              Install App
+            </v-btn>
           </v-card-actions>
         </v-card>
         <router-view/>
@@ -73,19 +73,21 @@ export default {
         href: '/about'
       }
     ],
-    prompt: null
+    prompt: null,
+    installed: false
   }),
   created() {
     document.title = this.APPNAME;
 
-    window.addEventListener('beforeinstallprompt', (e) => {
+    window.addEventListener('beforeinstallprompt', e => {
       e.preventDefault();
       this.prompt = e;
     });
   },
   methods:{
-    async install(){
+    async install() {
       this.prompt.prompt();
+      if (await this.prompt.userChoice === 'accepted') this.installed = true;
     }
   }
 };
