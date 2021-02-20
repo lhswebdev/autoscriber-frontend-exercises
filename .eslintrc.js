@@ -38,6 +38,7 @@ module.exports = {
       'error',
       'always'
     ],
-    'keyword-spacing': 1
+    'keyword-spacing': 1,
+    'arrow-spacing': 'error'
   }
 };
