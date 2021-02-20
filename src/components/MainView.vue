@@ -12,9 +12,12 @@
         dark
         x-large
         color="pink"
-        @click="startRecognition()"
+        @click="started ? stopRecognition() : startRecognition()"
       >
-        <v-icon dark>
+        <v-icon v-if="started">
+          mdi-microphone-off
+        </v-icon>
+        <v-icon v-else>
           mdi-microphone
         </v-icon>
       </v-btn>
@@ -25,6 +28,8 @@
     <v-card-subtitle>
       <p v-for="(item, index) in recordedSpeech" :key="index" :style="{
         color: item.hot ? 'orange' : undefined
+      }" :class="{
+        'text-center': item.hot
       }">
         {{ item.text }}
       </p>
@@ -33,8 +38,14 @@
 </template>
 
 <script>
-import { recognition } from '@/modules/recognition.js';
-
+const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+recognition.continuous = false;
+recognition.interimResults = true;
+recognition.onstart = () => {
+  console.debug('Recognition started');
+};
+recognition.onaudioend = () => recognition.stop();
+recognition.lang = 'en-US';
 export default {
   data: () => ({
     recordedSpeech: [{
@@ -45,8 +56,7 @@ export default {
   }),
   methods: {
     startRecognition() {
-      recognition.onresult = event =>{
-        console.debug(event);
+      this.recognition.onresult = event => {
         const result = event.results[event.results.length - 1];
         const resultText = Array.from(result).map(d => d.transcript).join(' ');
         // const confidence = result[0].confidence;
@@ -54,14 +64,25 @@ export default {
         const index = Math.max(this.recordedSpeech.length - 1, 0);
         this.$set(this.recordedSpeech[index], 'text', resultText);
         if (result.isFinal) {
+          console.debug(event);
           this.recordedSpeech[index].hot = false;
           this.recordedSpeech.push({
             hot: true
           });
         }
       };
-      recognition.start();
+      
+      recognition.onend = () => {
+        recognition.start();
+      };
+      this.recognition.start();
       this.started = true;
+      
+    },
+    stopRecognition() {
+      this.recognition.onend = undefined;
+      this.recognition.stop();
+      this.started = false;
     }
   }
 };
