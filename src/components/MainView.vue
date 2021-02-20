@@ -46,6 +46,7 @@ export default {
   methods: {
     startRecognition() {
       recognition.onresult = event =>{
+        console.debug(event);
         const result = event.results[event.results.length - 1];
         const resultText = Array.from(result).map(d => d.transcript).join(' ');
         // const confidence = result[0].confidence;
