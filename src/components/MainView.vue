@@ -34,6 +34,16 @@
         {{ item.text }}
       </p>
     </v-card-subtitle>
+    <v-card-actions class="justify-end">
+      <v-btn v-if="recordedSpeech[0].text" class="pink justify-center"
+        dark
+        x-large
+        color="pink"
+        @click="summarize()"
+      >
+        Finish and Summarize
+      </v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
@@ -52,7 +62,7 @@ export default {
       hot: true
     }],
     recognition,
-    started: false
+    started: false,
   }),
   methods: {
     startRecognition() {
@@ -77,12 +87,18 @@ export default {
       };
       this.recognition.start();
       this.started = true;
-      
     },
     stopRecognition() {
       this.recognition.onend = undefined;
       this.recognition.stop();
       this.started = false;
+    },
+    summarize() {
+      if (this.started) {
+        this.stopRecognition();
+      }
+      // Send request to DB
+      // do backend stuff!
     }
   }
 };
