@@ -87,10 +87,10 @@ export default {
           const time = Math.floor(new Date().getTime()/1000);  // timestamp in seconds
           const blob = {
             uuid: this.uuid,
-            message: this.recordedSpeech[0].text,
+            message: this.recordedSpeech[index].text,
             timestamp: time,
           }; // Current blob
-          const res = await axios.post(`${backend_domain}/add`, blob)
+          const res = await axios.post(`${backend_domain}/add`, blob);
           if (!this.uuid) {
             this.uuid = res.data;
           }
@@ -112,6 +112,7 @@ export default {
       if (this.started) {
         this.stopRecognition();
       }
+      
       // do backend stuff!
     },
   }
