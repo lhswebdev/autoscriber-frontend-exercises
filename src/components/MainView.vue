@@ -39,7 +39,7 @@
         dark
         x-large
         color="pink"
-        @click="summarize()"
+        @click="endRecording()"
       >
         Finish and Summarize
       </v-btn>
@@ -48,6 +48,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+const backend_domain = 'localhost';
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 recognition.continuous = false;
 recognition.interimResults = true;
@@ -70,15 +72,25 @@ export default {
         const result = event.results[event.results.length - 1];
         const resultText = Array.from(result).map(d => d.transcript).join(' ');
         // const confidence = result[0].confidence;
-        console.log(resultText);
         const index = Math.max(this.recordedSpeech.length - 1, 0);
         this.$set(this.recordedSpeech[index], 'text', resultText);
         if (result.isFinal) {
+          console.log(resultText);
           console.debug(event);
           this.recordedSpeech[index].hot = false;
           this.recordedSpeech.push({
             hot: true
           });
+
+          // Make post request after each blob
+          const time = new Date();
+          const req = {
+            uuid: '',
+            message: this.recordedSpeech[0].text,
+            timestamp: Math.floor(time.getTime()/1000),
+          };
+          const uuid = axios.post(`${backend_domain}:3000/add`, req);
+          console.log(uuid);
         }
       };
       
@@ -93,11 +105,10 @@ export default {
       this.recognition.stop();
       this.started = false;
     },
-    summarize() {
+    endRecording() {
       if (this.started) {
         this.stopRecognition();
       }
-      // Send request to DB
       // do backend stuff!
     }
   }
