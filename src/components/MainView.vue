@@ -49,7 +49,7 @@
 
 <script>
 import axios from 'axios';
-const backend_domain = 'localhost';
+const backend_domain = 'http://localhost:3000';
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 recognition.continuous = false;
 recognition.interimResults = true;
@@ -63,12 +63,13 @@ export default {
     recordedSpeech: [{
       hot: true
     }],
+    uuid: '',
     recognition,
     started: false,
   }),
   methods: {
     startRecognition() {
-      this.recognition.onresult = event => {
+      this.recognition.onresult = async (event) => {
         const result = event.results[event.results.length - 1];
         const resultText = Array.from(result).map(d => d.transcript).join(' ');
         // const confidence = result[0].confidence;
@@ -81,16 +82,18 @@ export default {
           this.recordedSpeech.push({
             hot: true
           });
-
+          
           // Make post request after each blob
-          const time = new Date();
-          const req = {
-            uuid: '',
+          const time = Math.floor(new Date().getTime()/1000);  // timestamp in seconds
+          const blob = {
+            uuid: this.uuid,
             message: this.recordedSpeech[0].text,
-            timestamp: Math.floor(time.getTime()/1000),
-          };
-          const uuid = axios.post(`${backend_domain}:3000/add`, req);
-          console.log(uuid);
+            timestamp: time,
+          }; // Current blob
+          const res = await axios.post(`${backend_domain}/add`, blob)
+          if (!this.uuid) {
+            this.uuid = res.data;
+          }
         }
       };
       
@@ -110,7 +113,7 @@ export default {
         this.stopRecognition();
       }
       // do backend stuff!
-    }
+    },
   }
 };
 </script>
