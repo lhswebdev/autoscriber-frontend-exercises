@@ -76,7 +76,6 @@ export default {
         const index = Math.max(this.recordedSpeech.length - 1, 0);
         this.$set(this.recordedSpeech[index], 'text', resultText);
         if (result.isFinal) {
-          console.log(resultText);
           console.debug(event);
           this.recordedSpeech[index].hot = false;
           this.recordedSpeech.push({
