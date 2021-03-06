@@ -49,7 +49,7 @@
 
 <script>
 import axios from 'axios';
-const backend_domain = process.env.BACKEND_DOMAIN;
+const backend_domain = process.env.VUE_APP_BACKEND_DOMAIN;
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 recognition.continuous = false;
 recognition.interimResults = true;
