@@ -7,13 +7,13 @@
       >Welcome to Autoscriber!</v-card-title
     >
     <v-card-actions class="justify-center" style="flex-wrap: wrap;">
-      <v-btn class="blue paddedButton" dark large>
+      <v-btn class="blue paddedButton" dark large @click="createSession()">
         Create a New Session
       </v-btn>
-      <v-btn class="green paddedButton" dark large>
+      <v-btn class="green paddedButton" dark large @click="joinSession()">
         Join a Session
       </v-btn>
-      <v-btn class="gray paddedButton" dark large>
+      <v-btn class="gray paddedButton" dark large @click="downloadNotes()">
         Download Notes
       </v-btn>
     </v-card-actions>
@@ -22,6 +22,7 @@
 
 <script>
 import axios from 'axios';
+import askName from '../components/askName.js';
 const backend_domain = process.env.VUE_APP_BACKEND_DOMAIN;
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 recognition.continuous = false;
@@ -33,60 +34,24 @@ recognition.onaudioend = () => recognition.stop();
 recognition.lang = 'en-US';
 export default {
   data: () => ({
-    recordedSpeech: [{
-      hot: true
-    }],
-    uuid: '',
-    recognition,
-    started: false,
   }),
   methods: {
-    startRecognition() {
-      this.recognition.onresult = async (event) => {
-        const result = event.results[event.results.length - 1];
-        const resultText = Array.from(result).map(d => d.transcript).join(' ');
-        // const confidence = result[0].confidence;
-        const index = Math.max(this.recordedSpeech.length - 1, 0);
-        this.$set(this.recordedSpeech[index], 'text', resultText);
-        if (result.isFinal) {
-          console.debug(event);
-          this.recordedSpeech[index].hot = false;
-          this.recordedSpeech.push({
-            hot: true
-          });
-          
-          // Make post request after each blob
-          const time = Math.floor(new Date().getTime()/1000);  // timestamp in seconds
-          const blob = {
-            uuid: this.uuid,
-            message: this.recordedSpeech[index].text,
-            timestamp: time,
-          }; // Current blob
-          const res = await axios.post(`${backend_domain}/add`, blob);
-          if (!this.uuid) {
-            this.uuid = res.data;
-          }
-        }
-      };
-      
-      recognition.onend = () => {
-        recognition.start();
-      };
-      this.recognition.start();
-      this.started = true;
+    async joinSession() {
+      const meetingID = await this.$dialog.prompt({
+        text: 'Session ID or Link',
+        title: 'Enter a session ID or invite link.',
+      });
+      if (!meetingID) return;
+      this.$router.push(`/session/${meetingID}`);
     },
-    stopRecognition() {
-      this.recognition.onend = undefined;
-      this.recognition.stop();
-      this.started = false;
-    },
-    endRecording() {
-      if (this.started) {
-        this.stopRecognition();
-      }
-      
-      // do backend stuff!
-    },
+    async createSession() {
+      const name = await askName(this.$dialog);
+      if (!name) return;
+      const res = await axios.post(`${backend_domain}/host`, {
+        name
+      });
+      this.$router.push(`/session/${res.meeting_id}`);
+    }
   }
 };
 </script>
