@@ -1,14 +1,19 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import MainView from '../components/MainView.vue';
+import JoinView from '../views/JoinView.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: MainView
+    name: 'Join',
+    component: JoinView
+  },
+  {
+    path: '/session/:sessionID',
+    name: 'Session',
+    component: () => import(/* webpackChunkName: "session" */ '../views/SessionView.vue')
   },
   {
     path: '/about',

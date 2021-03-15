@@ -2,19 +2,20 @@
   <v-app>
     <v-app-bar dark color="blue" app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-
-      <v-toolbar-title>{{ APPNAME }}</v-toolbar-title>
+      <!-- <v-toolbar-title>{{ APPNAME }}</v-toolbar-title> -->
 
       <v-spacer></v-spacer>
-      <v-switch
+      <!-- <v-switch
         class="navSwitch"
         v-model="$vuetify.theme.dark"
         color="white"
         label="Dark Theme"
-      ></v-switch>
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
+      ></v-switch> -->
+      <router-link tag="span" to="/">
+        <v-btn icon>
+          <v-icon>mdi-home</v-icon>
+        </v-btn>
+      </router-link>
     </v-app-bar>
 
     <v-navigation-drawer
@@ -65,11 +66,11 @@ export default {
     drawer: false,
     navbarItems: [
       {
-        title: 'Home',
+        title: 'Create/Join Session',
         href: '/'
       },
       {
-        title: 'About',
+        title: 'About Autoscriber',
         href: '/about'
       }
     ],

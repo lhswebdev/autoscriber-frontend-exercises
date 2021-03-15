@@ -1,47 +1,20 @@
 <template>
-  <v-card color="#385F73" dark class="card">
-    <v-card-title class="headline"
-      >Welcome to Autoscriber</v-card-title
+  <v-card color="#385F73" dark class="card" style="
+    width: fit-content;
+    padding: 0px 25px 20px 25px;
+  ">
+    <v-card-title class="headline justify-center"
+      >Welcome to Autoscriber!</v-card-title
     >
-
-    <v-card-subtitle>Click the microphone icon to begin the speech recognition demo.</v-card-subtitle>
     <v-card-actions class="justify-center">
-      <v-btn
-        class="pink justify-center micbutton"
-        fab
-        dark
-        x-large
-        color="pink"
-        @click="started ? stopRecognition() : startRecognition()"
-      >
-        <v-icon v-if="started">
-          mdi-microphone-off
-        </v-icon>
-        <v-icon v-else>
-          mdi-microphone
-        </v-icon>
+      <v-btn class="blue" dark x-large>
+        Create a New Session
       </v-btn>
-    </v-card-actions>
-    <v-card-subtitle v-if="started" style="color: pink;" class="text-center">
-      Speech recognition is running!
-    </v-card-subtitle>
-    <v-card-subtitle>
-      <p v-for="(item, index) in recordedSpeech" :key="index" :style="{
-        color: item.hot ? 'orange' : undefined
-      }" :class="{
-        'text-center': item.hot
-      }">
-        {{ item.text }}
-      </p>
-    </v-card-subtitle>
-    <v-card-actions class="justify-end">
-      <v-btn v-if="recordedSpeech[0].text" class="pink justify-center"
-        dark
-        x-large
-        color="pink"
-        @click="endRecording()"
-      >
-        Finish and Summarize
+      <v-btn class="green" dark x-large>
+        Join a Session
+      </v-btn>
+      <v-btn class="gray" dark x-large>
+        Download Notes
       </v-btn>
     </v-card-actions>
   </v-card>
