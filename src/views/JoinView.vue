@@ -6,14 +6,14 @@
     <v-card-title class="headline justify-center"
       >Welcome to Autoscriber!</v-card-title
     >
-    <v-card-actions class="justify-center">
-      <v-btn class="blue" dark x-large>
+    <v-card-actions class="justify-center" style="flex-wrap: wrap;">
+      <v-btn class="blue paddedButton" dark large>
         Create a New Session
       </v-btn>
-      <v-btn class="green" dark x-large>
+      <v-btn class="green paddedButton" dark large>
         Join a Session
       </v-btn>
-      <v-btn class="gray" dark x-large>
+      <v-btn class="gray paddedButton" dark large>
         Download Notes
       </v-btn>
     </v-card-actions>
@@ -92,4 +92,7 @@ export default {
 </script>
 
 <style>
+.paddedButton {
+  margin: 5px;
+}
 </style>
