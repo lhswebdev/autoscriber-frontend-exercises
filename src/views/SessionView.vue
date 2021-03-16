@@ -149,7 +149,8 @@ export default {
     }
   },
   async created(){
-    const name = await askName(this.$dialog);
+    const name = (await askName(this.$dialog) || '').trim();
+    if (!name) return;
     this.name = name;
     axios.post(`${backend_domain}/join`, {
       name,
