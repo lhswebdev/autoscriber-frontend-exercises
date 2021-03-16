@@ -37,25 +37,19 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-
     <v-content>
       <v-col cols="12">
-        <v-card color="pink accent-4" dark class="card" v-if="prompt && !installed">
-          <v-card-title class="headline"
-            >Install the Autoscriber App</v-card-title
-          >
-
-          <v-card-subtitle>Autoscriber works best when installed on your device.</v-card-subtitle>
-
-          <v-card-actions>
-            <v-btn text @click="install()" target="_blank">
-              Install App
-            </v-btn>
-          </v-card-actions>
-        </v-card>
         <router-view/>
       </v-col>
     </v-content>
+    <div class="text-center" style="display: inline-block;" v-if="prompt && !installed">
+      <v-snackbar color="indigo">
+        <span style="display: inline-block; transform: translate(0, 50%) !important;">
+          Install Autoscriber as an app!
+        </span>
+        <v-btn dark style="float: right;" @click="install()" color="pink">Install</v-btn>
+      </v-snackbar>
+    </div>
   </v-app>
 </template>
 
@@ -75,7 +69,7 @@ export default {
       }
     ],
     prompt: null,
-    installed: false
+    installed: false,
   }),
   created() {
     document.title = this.APPNAME;
@@ -117,5 +111,11 @@ html {
   #install-prompt {
     display: none;
   }
+}
+.v-snack__wrapper {
+  display: block !important;
+}
+.v-snack__content {
+  overflow: auto !important;
 }
 </style>

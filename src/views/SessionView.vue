@@ -22,7 +22,7 @@
     </v-card-title>
 
     
-    <v-card-subtitle>Joining as {{ name }}</v-card-subtitle>
+    <v-card-subtitle>Joined as {{ name }}</v-card-subtitle>
 
     <v-card-subtitle>Click the microphone icon to start recording.</v-card-subtitle>
     <v-card-actions class="justify-center">
@@ -149,7 +149,7 @@ export default {
     }
   },
   async created(){
-    const name = await askName(this.$dialog);
+    const name = (await askName(this.$dialog) || '').trim();
     if (!name) return;
     this.name = name;
     axios.post(`${backend_domain}/join`, {
