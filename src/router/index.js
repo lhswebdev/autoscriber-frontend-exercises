@@ -13,7 +13,8 @@ const routes = [
   {
     path: '/session/:sessionID',
     name: 'Session',
-    component: () => import(/* webpackChunkName: "session" */ '../views/SessionView.vue')
+    component: () => import(/* webpackChunkName: "session" */ '../views/SessionView.vue'),
+    props: true
   },
   {
     path: '/about',

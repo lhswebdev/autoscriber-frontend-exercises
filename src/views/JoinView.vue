@@ -37,11 +37,13 @@ export default {
   }),
   methods: {
     async joinSession() {
-      const meetingID = await this.$dialog.prompt({
+      let meetingID = await this.$dialog.prompt({
         text: 'Session ID or Link',
         title: 'Enter a session ID or invite link.',
       });
       if (!meetingID) return;
+      const split = meetingID.split('/session/');
+      if (split.length > 1) meetingID = split[1].substr(1);
       this.$router.push(`/session/${meetingID}`);
     },
     async createSession() {
@@ -50,7 +52,13 @@ export default {
       const res = await axios.post(`${backend_domain}/host`, {
         name
       });
-      this.$router.push(`/session/${res.meeting_id}`);
+      this.$router.push({
+        name: 'Session',
+        params: {
+          sessionID: res.data.meeting_id,
+          name
+        }
+      });
     }
   }
 };

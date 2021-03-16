@@ -2,7 +2,7 @@
   <v-card color="#385F73" dark class="card" style="padding-bottom: 10px;">
     <v-card-title class="headline" style="">
       Session:
-      <code style="margin-left: 0.5em;">{{ $route.params.sessionID }}</code>
+      <code style="margin-left: 0.5em;">{{ sessionID }}</code>
       <v-tooltip top>
         <template v-slot:activator="{ on, attrs }">
           <v-btn
@@ -90,8 +90,7 @@ export default {
     uuid: '',
     recognition,
     started: false,
-    copied: false,
-    name: 'Anonymous'
+    copied: false
   }),
   methods: {
     startRecognition() {
@@ -141,21 +140,31 @@ export default {
       // do backend stuff!
     },
     copyID() {
-      copy(`${window.location.origin}#/session/${this.$route.params.sessionID}`);
+      copy(`${window.location.origin}#/session/${this.sessionID}`);
       clearTimeout(this.copied);
       this.copied = setTimeout(() => {
         this.copied = false;
       }, 1000);
     }
   },
-  async created(){
-    const name = (await askName(this.$dialog) || '').trim();
+  async mounted(){
+    const name = (this.name || await askName(this.$dialog) || '').trim();
     if (!name) return;
     this.name = name;
     axios.post(`${backend_domain}/join`, {
       name,
-      meeting_id: this.$route.params.sessionID
+      meeting_id: this.sessionID
     });
+  },
+  props: {
+    name:{
+      type: String,
+      default: 'Anonymous',
+    },
+    sessionID:{
+      type: String,
+      required: true
+    }
   }
 };
 </script>
