@@ -50,7 +50,6 @@ export default {
       const name = await askName(this.$dialog);
       if (!name) return;
       const res = await axios.post(`${backend_domain}/host`, {
-        name
       });
       this.$router.push({
         name: 'Session',

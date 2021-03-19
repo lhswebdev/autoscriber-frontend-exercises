@@ -22,7 +22,7 @@
     </v-card-title>
 
     
-    <v-card-subtitle>Joined as {{ name }}</v-card-subtitle>
+    <v-card-subtitle>Joined as {{ displayName }}</v-card-subtitle>
 
     <v-card-subtitle>Click the microphone icon to start recording.</v-card-subtitle>
     <v-card-actions class="justify-center">
@@ -90,7 +90,8 @@ export default {
     uuid: '',
     recognition,
     started: false,
-    copied: false
+    copied: false,
+    displayName: ''
   }),
   methods: {
     startRecognition() {
@@ -148,9 +149,9 @@ export default {
     }
   },
   async mounted(){
-    const name = (this.name || await askName(this.$dialog) || '').trim();
+    const name = (this.name || await askName(this.$dialog) || 'Anonymous').trim();
     if (!name) return;
-    this.name = name;
+    this.displayName = name;
     axios.post(`${backend_domain}/join`, {
       name,
       meeting_id: this.sessionID
@@ -159,7 +160,7 @@ export default {
   props: {
     name:{
       type: String,
-      default: 'Anonymous',
+      default: null,
     },
     sessionID:{
       type: String,
