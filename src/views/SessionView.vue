@@ -72,7 +72,7 @@
 <script>
 import axios from 'axios';
 import copy from 'copy-to-clipboard';
-import askName from '../components/askName.js';
+import askUser from '../components/askUser.js';
 const backend_domain = process.env.VUE_APP_BACKEND_DOMAIN;
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 recognition.continuous = false;
@@ -149,7 +149,7 @@ export default {
     }
   },
   async mounted(){
-    const name = (this.name || await askName(this.$dialog) || 'Anonymous').trim();
+    const name = (this.name || await askUser(this.$dialog, 'name') || 'Anonymous').trim();
     if (!name) return;
     this.displayName = name;
     axios.post(`${backend_domain}/join`, {

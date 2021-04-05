@@ -22,7 +22,8 @@
 
 <script>
 import axios from 'axios';
-import askName from '../components/askName.js';
+import askUser from '../components/askUser.js';
+import { saveAs } from 'file-saver';
 const backend_domain = process.env.VUE_APP_BACKEND_DOMAIN;
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 recognition.continuous = false;
@@ -36,18 +37,19 @@ export default {
   data: () => ({
   }),
   methods: {
-    async joinSession() {
-      let meetingID = await this.$dialog.prompt({
-        text: 'Session ID or Link',
-        title: 'Enter a session ID or invite link.',
-      });
+    async getMeetingId() {
+      let meetingID = await askUser(this.$dialog, 'session');
       if (!meetingID) return;
       const split = meetingID.split('/session/');
       if (split.length > 1) meetingID = split[1].substr(1);
-      this.$router.push(`/session/${meetingID}`);
+      return meetingID;
+    },
+    async joinSession() {
+      const meetingID = await this.getMeetingId();
+      if (meetingID) this.$router.push(`/session/${meetingID}`);
     },
     async createSession() {
-      const name = await askName(this.$dialog);
+      const name = await askUser(this.$dialog, 'name');
       if (!name) return;
       const res = await axios.post(`${backend_domain}/host`, {
       });
@@ -58,6 +60,13 @@ export default {
           name
         }
       });
+    },
+    async downloadNotes() {
+      const meetingID = await this.getMeetingId();
+      if (meetingID) {
+        const text = await axios.get(`${backend_domain}/download?id=${meetingID}`);
+        saveAs(new Blob([text], {type: 'text/plain;charset=utf-8'}), `notes_${meetingID}.md`); 
+      }
     }
   }
 };

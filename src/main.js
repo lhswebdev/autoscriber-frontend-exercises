@@ -13,6 +13,13 @@ Vue.use(VuetifyDialog, {
 });
 Vue.config.productionTip = false;
 
+Vue.config.errorHandler = (err, vm, info) => { 
+  vm.$dialog.error({
+    title: err.toString(),
+    text: `Autoscriber encountered an error in ${info}.`
+  });
+};
+
 new Vue({
   vuetify,
   router,
