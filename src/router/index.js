@@ -19,16 +19,19 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import()
+    // TODO
+    // Look at the /session/:sessionID route above.
+    // `component` is a function, and it returns an import.
+    // The `webpackChunkName` is for our bundler, to specify a name for the route.
+    // In `/about` (this route), we want to import `../views/About.vue` and call the chunk `about`.
+    //
+    // TASK
+    // Write the appropriate import statement for `/about` (which imports `../views/About.vue`).
   }
 ];
 
 const router = new VueRouter({
-  // mode: 'history',
-  // base: process.env.BASE_URL,
   routes,
   base: '/'
 });

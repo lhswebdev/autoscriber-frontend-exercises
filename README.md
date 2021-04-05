@@ -1,24 +1,17 @@
-# autoscriber-app
+# Autoscriber Exercises
 
 ## Project setup
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+## Run for Development
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### Finding Tasks
 
-### Lints and fixes files
-```
-npm run lint
-```
+Simply search the entire project for the text `TODO`.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![Todo](./todo.png)

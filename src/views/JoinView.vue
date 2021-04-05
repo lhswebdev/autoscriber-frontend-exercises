@@ -45,8 +45,29 @@ export default {
       return meetingID;
     },
     async joinSession() {
-      const meetingID = await this.getMeetingId();
-      if (meetingID) this.$router.push(`/session/${meetingID}`);
+      // TODO
+      // This function redirects the user to the session screen.
+      // First, we need to ask for the meeting ID.
+      // You can ask the user for a meeting ID with:
+      //   await this.getMeetingId();
+      // We want to set this meeting ID to a variable called `meetingID` (const).
+      //
+      // TASK
+      // Set a constant variable called `meetingID` and set it to the meeting id input by the user.
+      
+      if (meetingID) {
+        // TODO
+        // Now that we have the meeting ID, we can redirect the user.
+        // We want to go to `/session/${meetingID}`.
+        // For example, if our meeting ID was 'testMeetingId', we would redirect to:
+        //   /session/testMeetingId
+        // You can redirect the page like this:
+        //   this.$router.push(PATH_YOU_WANT_TO_GO_TO);
+        //
+        // TASK
+        // Redirect the user to /session/testMeetingId.
+        
+      }
     },
     async createSession() {
       const name = await askUser(this.$dialog, 'name');

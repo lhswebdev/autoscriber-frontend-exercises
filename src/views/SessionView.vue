@@ -22,7 +22,23 @@
     </v-card-title>
 
     
-    <v-card-subtitle>Joined as {{ displayName }}</v-card-subtitle>
+    <v-card-subtitle>
+      <!-- 
+        TODO
+        The syntax for embedding variables in Vue is {{ variableName }}.
+        For example, check line 5:
+          <code style="margin-left: 0.5em;">{{ sessionID }}</code>
+        This will automatically update the text within the <code> block when sessionID changes.
+        Here in this <v-card-subtitle>, we want to show the `displayName` (the user's name).
+
+        TASK
+        Make this subtitle element look like:
+          Joined as Kento
+          Joined as Sangmin
+          Joined as ANY_NAME_HERE
+        The name of the user is stored in a variable called `displayName`.
+       -->
+    </v-card-subtitle>
 
     <v-card-subtitle>Click the microphone icon to start recording.</v-card-subtitle>
     <v-card-actions class="justify-center">
