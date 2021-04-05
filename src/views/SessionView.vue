@@ -12,7 +12,17 @@
           }"
           v-bind="attrs"
           v-on="on"
-          @click="copyID()">
+          @click="">
+            <!-- 
+              TODO
+              The @click directive runs a function on click.
+              We want to run copyID() when the user clicks the button.
+              For example:
+                <v-btn @click="doSomething()">Do Something<v-btn>
+
+              TASK
+              Make the <v-btn> above run copyID() when clicked.
+            -->
             <span v-if="!copied"><v-icon>mdi-link</v-icon> Copy</span>
             <span v-else><v-icon>mdi-check</v-icon> Copied!</span>
           </v-btn>
@@ -50,6 +60,22 @@
         color="pink"
         @click="started ? stopRecognition() : startRecognition()"
       >
+        <!-- 
+          TODO
+          Vue supports if-else statements right in the HTML.
+          For example:
+            let value = false;
+            ...
+            <div v-if="value">Only shown when value is true</div>
+            <div v-else>Only shown when value is false</div>
+          We want to show mdi-microphone-off only when the meeting is started,
+          and mdi-microphone when the meeting has not yet been started.
+          You can check whether a meeting has been started or not with the `started` variable.
+
+          TASK
+          Only show the v-icon containing mdi-microphone-off if `started` is true.
+          Else, show the v-icon with mdi-microphone.
+        -->
         <v-icon v-if="started">
           mdi-microphone-off
         </v-icon>
